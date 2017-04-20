@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <section>
+    <form action="/new_tama">
+      <label for="new.name">New Tama Name:</label>
+      <input type="text" name="new.name"/>
+    </form>
+  </section>
+  <section>
+    <% @tamas.each_with_index do |tama, idx| %>
+    <h2><%= tama[0] %></h2>
+    <form action="/tama_do">
+      <label for="method">Do something!</label>
+      <input type="text" name="method" />
+      <input type="hidden" value="<%= tama[0] %>" name="tama.name">
+    </form>
+    <% end %>
+  </section>
+  <section id="result">
+    <%= @result %>
+  </section>
+</div>
