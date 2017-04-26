@@ -3,19 +3,29 @@
     <form action="/new_tama">
       <label for="new.name">New Tama Name:</label>
       <input type="text" name="new.name"/>
+      <button type="submit">New Tama!</button>
     </form>
   </section>
   <section>
     <% @tamas.each_with_index do |tama, idx| %>
-    <h2><%= tama[0] %></h2>
-    <form action="/tama_do">
-      <label for="method">Do something!</label>
-      <input type="text" name="method" />
-      <input type="hidden" value="<%= tama[0] %>" name="tama.name">
-    </form>
+    <section class="panel col-md-4">
+      <% name = tama[0] %>
+      <h2><%= name %></h2>
+      <h3><%= tama[1].image %></h3>
+      <p>
+        Status: <%= tama[1].status %> <br />
+        Strength: <%= tama[1].strength %>
+      </p>
+      <form action="/tama_do">
+        <label for="method">Do something!</label>
+        <input type="text" name="method" />
+        <input type="hidden" value="<%= name %>" name="tama.name">
+        <button type="submit">Do Stuff!</button>
+      </form>
+      <div class="well">
+        <%= @result.nil? ? nil : @result[name] %>
+      </div>
+    </section>
     <% end %>
-  </section>
-  <section id="result">
-    <%= @result %>
   </section>
 </div>

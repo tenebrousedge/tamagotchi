@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'pry'
+require './lib/tama'
+
 if development?
   require 'sinatra/reloader'
   also_reload('**/*.rb')
@@ -18,9 +20,11 @@ get('/new_tama') do
 end
 
 get('/tama_do') do
+  # binding.pry
   @name = params.fetch('tama.name')
   @method = params.fetch('method')
-  @result = Tama.tama_action(@method, Tama.get_tamas(@name))
+  @result = {}
+  @result[@name] = Tama.tama_action(@method, Tama.get_tamas(@name))
   @tamas = Tama.get_tamas
   erb(:index)
 end
